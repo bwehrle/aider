@@ -788,7 +788,11 @@ def main(argv=None, input=None, output=None, force_git_root=None, return_coder=F
         io.tool_output(f"Git working dir: {git_root}")
 
     if args.load:
-        commands.cmd_load(args.load)
+        try:
+            commands.cmd_load(args.load)
+        except SwitchCoder:
+            pass
+        return
 
     if args.message:
         io.add_to_input_history(args.message)
